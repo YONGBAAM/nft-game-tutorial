@@ -6,12 +6,12 @@ const config = {
         mode: Phaser.Scale.FIT,
         width: 700,
         height: 800,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     physics: {
         default: 'arcade',
         arcade: {
-            // debug: true,
+            debug: false,
         }
     },
     pixelArt: true,

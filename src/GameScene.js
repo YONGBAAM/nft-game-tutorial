@@ -1,9 +1,10 @@
 class GameScene extends Phaser.Scene{
     constructor(){
-        super('game-scene')
+        super({key: 'game-scene'})
     }
     init(data)
     {  
+        this.score = data.score
     }
     preload(){
         this.load.setPath('./assets/images');
@@ -20,7 +21,7 @@ class GameScene extends Phaser.Scene{
         this.bg1=this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'bg1').setScale(1).setOrigin(0, 0);
         this.bg2=this.add.tileSprite(0, 285, WIDTH, HEIGHT, 'bg2').setScale(1).setOrigin(0, 0);
 
-        this.player=this.physics.add.sprite(200,HEIGHT/2,'player1').setScale(0.3);       
+        this.player=this.physics.add.sprite(200,HEIGHT/2,'player1').setScale(0.2);       
         //this.player=this.physics.add.sprite(200,HEIGHT/2,'player2').setScale(0.3);
         //this.player=this.physics.add.sprite(200,HEIGHT/2,'player3').setScale(0.3);
         //this.player=this.physics.add.sprite(200,HEIGHT/2,'player4').setScale(0.3);
@@ -73,8 +74,8 @@ class GameScene extends Phaser.Scene{
     addBlock(){
         this.blockGroup = this.physics.add.group();
 
-        var randomY = Phaser.Math.Between(725,810);
-        var randomHeight = Phaser.Math.Between(735,750);
+        var randomY = Phaser.Math.Between(600,1000);
+        var randomHeight = Phaser.Math.Between(700,750);
 
         var block1 = this.physics.add.sprite(WIDTH,randomY-randomHeight,'block').setScale(0.5).setFlipY(true);
         var block2 = this.physics.add.sprite(WIDTH,randomY,'block').setScale(0.5)

@@ -1,6 +1,6 @@
 class GameOverScene extends Phaser.Scene{
     constructor(){
-        super('game-over-scene')
+        super({key: 'game-over-scene'})
     }
     init(data)
     {
@@ -22,7 +22,7 @@ class GameOverScene extends Phaser.Scene{
         this.retryBtn = this.add.image(WIDTH/2, HEIGHT/2+200, 'retryBtn').setInteractive()
 
         this.retryBtn.once('pointerup', () => { 
-            this.scene.start('game-scene') 
+            this.scene.start('game-start-scene') 
         }, this)
 
         this.add.text(WIDTH/2-40, HEIGHT/2-120,'SCORE',{ fonFamily:'Arial', fontSize:'32px', fill: '#000'})

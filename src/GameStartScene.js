@@ -1,9 +1,11 @@
 class GameStartScene extends Phaser.Scene{
     constructor(){
-        super('game-start-scene')
+        super({key: 'game-start-scene'})
     }
     init(data)
-    {  
+    { 
+        this.score = data.score
+        this.startBtn = undefined
     }
     preload(){
         // json data load
