@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "53f81648-abf9-49e9-a258-dc7e8a1e7377",
+		"name": "nft-backend-withURI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createuser Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"bb123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getItems Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/inventory/bb123456",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"bb123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put gold",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/inventory/bb123456/gold/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"bb123456",
+						"gold",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove gold",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/inventory/bb123456/gold/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"bb123456",
+						"gold",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put nft",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/inventory/bb123456/items/12",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"bb123456",
+						"items",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete nft",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/inventory/bb123456/items/16",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"bb123456",
+						"items",
+						"16"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
