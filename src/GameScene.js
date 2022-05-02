@@ -26,7 +26,7 @@ class GameScene extends Phaser.Scene{
         //this.player=this.physics.add.sprite(200,HEIGHT/2,'player3').setScale(0.3);
         //this.player=this.physics.add.sprite(200,HEIGHT/2,'player4').setScale(0.3);
 
-        this.player.setGravityY(450);   //  Y축으로 중력을 450만큼 설정
+        this.player.setGravityY(500);   //  Y축으로 중력을 450만큼 설정
         this.player.setCollideWorldBounds(true);    //  게임 바깥으로 캐릭터가 나가지 않도록 함
 
         this.Score = 0; // 점수의 초기값을 0으로 설정함
@@ -74,7 +74,7 @@ class GameScene extends Phaser.Scene{
     addBlock(){
         this.blockGroup = this.physics.add.group();
 
-        var randomY = Phaser.Math.Between(600,1000);
+        var randomY = Phaser.Math.Between(500,1000);
         var randomHeight = Phaser.Math.Between(700,750);
 
         var block1 = this.physics.add.sprite(WIDTH,randomY-randomHeight,'block').setScale(0.5).setFlipY(true);
