@@ -10,7 +10,11 @@ class GameStartScene extends Phaser.Scene{
     preload(){
         // json data load
         this.load.json('jsonData', './src/nft-backend-withURI.postman_collection.json');
+
+        // Music
+        this.load.audio('intro_music', './assets/music/Intro3.wav');
         
+        // Image
         this.load.setPath('./assets/images')
         this.load.image('bg-start', 'ui/gamestart-bg.jpg')
         this.load.image('player', 'player/player_NFT_01.png')
@@ -24,20 +28,16 @@ class GameStartScene extends Phaser.Scene{
         let data = this.cache.json.get('jsonData');
         console.log(data);
 
+        this.music = this.sound.add('intro_music');
+        this.music.play();
+
         this.add.image(WIDTH/2, HEIGHT/2, 'bg-start')
 
         // Character Image
-        // this.add.image(WIDTH/2, HEIGHT/2-100, 'profile-bg').setScale(0.8)
-        this.add.image(WIDTH/2-120, HEIGHT/2-60, 'player').setScale(0.25)
-
-        this.add.text(WIDTH/2-50, HEIGHT/2-80, 'Id : ', {fontSize:15})
-        this.add.text(WIDTH/2+20, HEIGHT/2-80, 'wassue33fdlknfi2', {fontSize:15})
-
-        this.add.text(WIDTH/2-50, HEIGHT/2-60, 'Rank : ', {fontSize:15})
-        this.add.text(WIDTH/2+20, HEIGHT/2-60, '51535', {fontSize:15})
-
-        this.add.text(WIDTH/2-50, HEIGHT/2-40, 'Grade : ', {fontSize:15})
-        this.add.text(WIDTH/2+20, HEIGHT/2-40, '1', {fontSize:15})
+        this.add.image(WIDTH/2, HEIGHT/2-85, 'player').setScale(0.3).setOrigin(0.5, 0.5)
+        this.add.text(WIDTH/2, HEIGHT/2+20, 'ID : TestPlayer', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
+        this.add.text(WIDTH/2, HEIGHT/2+65, 'RANK : 9', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
+        this.add.text(WIDTH/2, HEIGHT/2+110, 'GRADE : 1', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
         
         this.startBtn = this.add.image(WIDTH/2, HEIGHT/2+200, 'startBtn').setInteractive()
 

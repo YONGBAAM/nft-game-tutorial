@@ -7,6 +7,12 @@ class GameScene extends Phaser.Scene{
         this.score = data.score
     }
     preload(){
+        // Music
+        this.load.audio('hit_music', './assets/music/Hit1.wav');
+        this.load.audio('jump_music', './assets/music/Jump1.wav');
+        this.load.audio('getItem_music', './assets/music/Get Item1.wav');
+
+        // Image
         this.load.setPath('./assets/images');
         this.load.image('bg1', 'background/back_ocean_top.jpg');
         this.load.image('bg2', 'background/back_ocean_bottom.png');
@@ -15,29 +21,96 @@ class GameScene extends Phaser.Scene{
         this.load.image('player2', 'player/player_NFT_02.png');
         this.load.image('player3', 'player/player_NFT_03.png');
         this.load.image('player4', 'player/player_NFT_04.png');
+        this.load.image('player4', 'player/player_NFT_05.png');
     }
 
     create(){
         this.bg1=this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'bg1').setScale(1).setOrigin(0, 0);
         this.bg2=this.add.tileSprite(0, 285, WIDTH, HEIGHT, 'bg2').setScale(1).setOrigin(0, 0);
 
-        this.player=this.physics.add.sprite(200,HEIGHT/2,'player1').setScale(0.2);       
-        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player2').setScale(0.3);
-        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player3').setScale(0.3);
-        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player4').setScale(0.3);
+        this.player=this.physics.add.sprite(200,HEIGHT/2,'player1').setScale(0.15);       
+        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player2').setScale(0.2);
+        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player3').setScale(0.2);
+        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player4').setScale(0.2);
+        //this.player=this.physics.add.sprite(200,HEIGHT/2,'player5').setScale(0.2);
 
         this.player.setGravityY(500);   //  Y축으로 중력을 450만큼 설정
         this.player.setCollideWorldBounds(true);    //  게임 바깥으로 캐릭터가 나가지 않도록 함
 
         this.Score = 0; // 점수의 초기값을 0으로 설정함
-        this.ScoreText = this.add.text(480,10,"-", {font:"bold 32px Arial"});
+        this.ScoreText = this.add.text(520,10,"-", {font:"bold 32px Arial"});
+
+        this.PlayTime = 0;  // 시간의 초기값을 0으로 설정함
+        this.PlayTimeText = this.add.text(10,10,"-", {font:"bold 32px Arial"});
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => this.PlayTime++,
+            callbackScope: this,
+            loop: true
+        })
+
+        this.LifeCount = 1;  // 목숨의 초기값을 1으로 설정함
+        this.LifeCountText = this.add.text(280,10,"-", {font:"bold 32px Arial"});
         
         this.delay = 300;  //  0.3초마다 새로운 장애물이 나오도록 함
         this.timer = this.time.addEvent({
-            delay: this.delay, callback: this.onTimerEvent, callbackScope: this, loop: true 
+            delay: this.delay,
+            callback: this.onTimerEvent,
+            callbackScope: this,
+            loop: true
         });
-        
-        this.input.on('pointerdown', function (pointer) {
+
+        this.input.on('pointerdown', function (pointer) {   // 마우스 왼쪽 클릭으로 캐릭터 조작
+            this.music = this.sound.add('jump_music');
+            this.music.play();
+            if(this.player_tweens)this.player_tweens.stop();
+            this.player.setVelocity(0,-150);    // 캐릭터가 Y축으로 150만큼 위로 올라감
+            this.player_tweens = this.tweens.timeline({
+                tweens: [
+                    {
+                        targets:this.player,
+                        angle:-30,
+                        duration:300,
+                        onComplete:function(tween,targets){
+                            this.player.setVelocity(0,0);
+                        }.bind(this)
+                    },
+                    {
+                        targets:this.player,
+                        angle:30,
+                        duration:500,
+                    }
+                ]
+            });
+        }.bind(this));
+
+        this.input.keyboard.on('keydown-SPACE', function (pointer) {    // SPACE 버튼으로 캐릭터 조작
+            this.music = this.sound.add('jump_music');
+            this.music.play();
+            if(this.player_tweens)this.player_tweens.stop();
+            this.player.setVelocity(0,-150);    // 캐릭터가 Y축으로 150만큼 위로 올라감
+            this.player_tweens = this.tweens.timeline({
+                tweens: [
+                    {
+                        targets:this.player,
+                        angle:-30,
+                        duration:300,
+                        onComplete:function(tween,targets){
+                            this.player.setVelocity(0,0);
+                        }.bind(this)
+                    },
+                    {
+                        targets:this.player,
+                        angle:30,
+                        duration:500,
+                    }
+                ]
+            });
+        }.bind(this));
+
+        this.input.keyboard.on('keydown-ENTER', function (pointer) {    // ENTER 버튼으로 캐릭터 조작
+            this.music = this.sound.add('jump_music');
+            this.music.play();
             if(this.player_tweens)this.player_tweens.stop();
             this.player.setVelocity(0,-150);    // 캐릭터가 Y축으로 150만큼 위로 올라감
             this.player_tweens = this.tweens.timeline({
@@ -65,6 +138,8 @@ class GameScene extends Phaser.Scene{
         this.bg2.tilePositionX +=1.5;
     
         this.ScoreText.text = "Score : " + this.Score;
+        this.PlayTimeText.text = "Time : " + this.PlayTime + "s";
+        this.LifeCountText.text = "Life : " + this.LifeCount;
     }
 
     onTimerEvent(){
@@ -107,8 +182,10 @@ class GameScene extends Phaser.Scene{
     }
 
     hitBlockPlayer(){
+        this.music = this.sound.add('hit_music');
+        this.music.play();
         this.scene.start('game-over-scene', {
             score : this.Score,
-        })
+        });
     }
 }
