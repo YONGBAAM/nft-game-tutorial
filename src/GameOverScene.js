@@ -2,11 +2,13 @@ class GameOverScene extends Phaser.Scene{
     constructor(){
         super({key: 'game-over-scene'})
     }
+
     init(data)
     {
         this.score = data.score
         this.replayButton = undefined
     }
+    
     preload(){
         // Music
         this.load.audio('death_music', './assets/music/Death1.wav');

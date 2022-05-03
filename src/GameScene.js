@@ -2,10 +2,12 @@ class GameScene extends Phaser.Scene{
     constructor(){
         super({key: 'game-scene'})
     }
+
     init(data)
     {  
         this.score = data.score
     }
+    
     preload(){
         // Music
         this.load.audio('hit_music', './assets/music/Hit1.wav');

@@ -2,11 +2,13 @@ class GameStartScene extends Phaser.Scene{
     constructor(){
         super({key: 'game-start-scene'})
     }
+
     init(data)
-    { 
+    {
         this.score = data.score
         this.startBtn = undefined
     }
+
     preload(){
         // json data load
         this.load.json('jsonData', './src/nft-backend-withURI.postman_collection.json');
@@ -35,7 +37,7 @@ class GameStartScene extends Phaser.Scene{
 
         // Character Image
         this.add.image(WIDTH/2, HEIGHT/2-85, 'player').setScale(0.3).setOrigin(0.5, 0.5)
-        this.add.text(WIDTH/2, HEIGHT/2+20, 'ID : TestPlayer', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
+        this.add.text(WIDTH/2, HEIGHT/2+20, 'ID : 0x6a11d336f89FC7139e23155E68d2D', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
         this.add.text(WIDTH/2, HEIGHT/2+65, 'RANK : 9', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
         this.add.text(WIDTH/2, HEIGHT/2+110, 'GRADE : 1', {fonStyle:'Arial', fontWeight:'bold', fontSize:30}).setOrigin(0.5, 0.5)
         
